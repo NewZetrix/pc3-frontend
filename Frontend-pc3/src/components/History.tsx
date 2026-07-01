@@ -1,4 +1,3 @@
-// src/components/History.tsx
 import type { HistoryItem } from '../types';
 
 interface Props {
@@ -8,48 +7,72 @@ interface Props {
 const History = ({ history }: Props) => {
   if (history.length === 0) {
     return (
-      <div className="bg-white rounded-3xl shadow p-8 text-center text-gray-500">
+      <div className="card border-0 p-5 text-center text-secondary rounded-4" style={{ backgroundColor: '#1e1e1e' }}>
         Aún no hay evaluaciones. Realiza tu primera predicción.
       </div>
     );
   }
 
   return (
-    <div className="bg-white rounded-3xl shadow-lg p-6">
-      <h3 className="text-xl font-semibold mb-5 flex items-center gap-2">
+    <div className="card border-0 p-4 rounded-4 text-light" style={{ backgroundColor: '#1e1e1e' }}>
+      <h3 className="fs-5 fw-bold mb-4 d-flex align-items-center gap-2">
         📜 Historial de Evaluaciones
       </h3>
 
-      <div className="space-y-4 max-h-96 overflow-y-auto pr-2">
-        {history.map((item) => (
-          <div 
-            key={item.id}
-            className="flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors p-5 rounded-2xl border border-gray-100"
-          >
-            <div className="flex items-center gap-4">
-              <div className={`w-4 h-4 rounded-full ${
-                item.prediction.risk === 'RIESGO_ALTO' ? 'bg-red-500' :
-                item.prediction.risk === 'RIESGO_MEDIO' ? 'bg-yellow-500' : 'bg-green-500'
-              }`} />
-              
-              <div>
-                <p className="font-medium">{item.date}</p>
-                <p className="text-sm text-gray-500">
-                  Promedio: {item.promedio_actual} | Asistencia: {item.asistencia_pct}%
-                </p>
-              </div>
-            </div>
+      <div className="d-flex flex-column gap-3 overflow-y-auto pe-2" style={{ maxHeight: '380px' }}>
+        {history.map((item) => {
+          const colorMap = {
+            RIESGO_ALTO: '#dc3545',
+            RIESGO_MEDIO: '#ffc107',
+            RIESGO_BAJO: '#198754'
+          };
+          const currentColor = colorMap[item.prediction.risk] || '#6c757d';
 
-            <div className="text-right">
-              <span className={`inline-block px-4 py-1.5 rounded-full text-sm font-semibold text-white ${
-                item.prediction.risk === 'RIESGO_ALTO' ? 'bg-red-500' :
-                item.prediction.risk === 'RIESGO_MEDIO' ? 'bg-yellow-500' : 'bg-green-500'
-              }`}>
-                {item.prediction.risk.replace('RIESGO_', '')}
-              </span>
+          return (
+            <div 
+              key={item.id}
+              className="d-flex flex-column flex-md-row align-items-md-center justify-content-between p-3 rounded-4 transition border border-secondary-subtle"
+              style={{ 
+                backgroundColor: '#2d2d2d',
+                transition: 'background-color 0.2s ease'
+              }}
+            >
+              <div className="d-flex align-items-center gap-3 mb-2 mb-md-0">
+                <div 
+                  className="rounded-circle flex-shrink-0" 
+                  style={{ 
+                    width: '14px', 
+                    height: '14px', 
+                    backgroundColor: currentColor,
+                    boxShadow: `0 0 8px ${currentColor}` 
+                  }} 
+                />
+                
+                <div>
+                  <p className="fw-bold m-0 small text-white">{item.date}</p>
+                  <p className="text-secondary small m-0" style={{ fontSize: '0.82rem' }}>
+                    Promedio: <strong className="text-light">{item.promedio_actual}</strong> | Asistencia: <strong className="text-light">{item.asistencia_pct}%</strong>
+                  </p>
+                </div>
+              </div>
+
+              <div className="text-start text-md-end">
+                <span 
+                  className="badge rounded-pill px-3 py-2 fw-bold text-uppercase" 
+                  style={{ 
+                    backgroundColor: `${currentColor}22`,
+                    color: currentColor, 
+                    border: `1px solid ${currentColor}`,
+                    fontSize: '0.75rem'
+                  }}
+                >
+                  {item.prediction.risk.replace('RIESGO_', '')}
+                </span>
+              </div>
+
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

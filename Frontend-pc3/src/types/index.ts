@@ -1,4 +1,3 @@
-// src/types/index.ts
 export interface StudentData {
   promedio_actual: number;
   asistencia_pct: number;

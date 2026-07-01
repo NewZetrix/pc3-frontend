@@ -1,4 +1,3 @@
-// src/components/RiskChart.tsx
 import type { StudentData } from '../types';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -21,9 +20,9 @@ const RiskChart = ({ data }: Props) => {
   const chartData = {
     labels: [
       'Promedio',
-      'Asistencia',
-      'Tareas',
-      'Participación',
+      'Asistencia %',
+      'Tareas %',
+      'Participación %',
       'Horas Estudio',
       'Nota PC Anterior'
     ],
@@ -38,9 +37,15 @@ const RiskChart = ({ data }: Props) => {
         data.nota_pc_anterior
       ],
       backgroundColor: [
-        '#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ec4899', '#ef4444'
+        '#0d6efd', 
+        '#198754', 
+        '#6f42c1', 
+        '#fd7e14', 
+        '#e83e8c', 
+        '#dc3545'
       ],
       borderRadius: 8,
+      barThickness: 28,
     }]
   };
 
@@ -51,28 +56,40 @@ const RiskChart = ({ data }: Props) => {
       legend: { display: false },
       title: {
         display: true,
-        text: 'Variables Críticas del Estudiante',
-        font: { size: 18 },
-        color: '#1f2937'
+        text: '📊 Variables Críticas del Estudiante',
+        font: { size: 18, weight: 'bold' as const },
+        color: '#ffffff',
+        padding: { bottom: 20 }
       },
+      tooltip: {
+        backgroundColor: '#2d2d2d',
+        titleColor: '#ffffff',
+        bodyColor: '#ffffff',
+        borderColor: '#444444',
+        borderWidth: 1
+      }
     },
     scales: {
       y: {
         beginAtZero: true,
         max: 100,
-        ticks: { color: '#6b7280' }
+        grid: { color: 'rgba(255, 255, 255, 0.1)' }, 
+        ticks: { color: '#b3b3b3' } // Texto de escala en gris claro
       },
-      x: { ticks: { color: '#6b7280' } }
+      x: {
+        grid: { display: false }, // Limpia las líneas verticales redundantes
+        ticks: { color: '#b3b3b3', font: { weight: 'bold' as const } }
+      }
     },
   };
 
   return (
-    <div className="bg-white rounded-3xl shadow-lg p-8">
-      <div className="h-80">
+    <div className="card border-0 p-4 rounded-4" style={{ backgroundColor: '#1e1e1e' }}>
+      <div style={{ height: '360px', position: 'relative' }}>
         <Bar data={chartData} options={options} />
       </div>
-      <p className="text-center text-sm text-gray-500 mt-4">
-        Variables más importantes para la predicción
+      <p className="text-center text-secondary small mt-3 m-0" style={{ opacity: 0.8 }}>
+        Visualización comparativa de las métricas e indicadores procesados por el modelo de IA.
       </p>
     </div>
   );
