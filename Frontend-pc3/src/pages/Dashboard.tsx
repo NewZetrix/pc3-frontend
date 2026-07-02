@@ -44,19 +44,20 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="bg-light min-vh-screen py-5">
+    // Se cambia bg-light por un fondo oscuro profundo (por ejemplo, un gris casi negro muy elegante)
+    <div className="min-vh-screen py-5" style={{ backgroundColor: '#121214' }}>
       <div className="container-fluid px-md-5">
         
         {/* Encabezado Principal */}
         <div className="mb-4 text-center text-md-start">
-          <h1 className="display-5 fw-bold text-dark m-0">UTP RiskAI</h1>
-          <p className="text-muted fs-5">Predicción de Riesgo Académico (Módulo Integrado IA)</p>
-          <hr />
+          <h1 className="display-5 fw-bold text-light m-0">UTP RiskAI</h1>
+          <p className="text-secondary fs-5">Predicción de Riesgo Académico (Módulo Integrado IA)</p>
+          <hr className="border-secondary opacity-25" />
         </div>
 
         {/* Alerta de Error de Conexión */}
         {error && (
-          <div className="alert alert-danger shadow-sm border-start border-4 border-danger rounded-3 mb-4" role="alert">
+          <div className="alert alert-danger shadow-sm border-start border-4 border-danger rounded-3 mb-4 bg-dark text-danger" role="alert">
             <h5 className="alert-heading fw-bold">⚠️ Error de Red / Conexión con Spring Boot</h5>
             <p className="mb-0 small">{error}</p>
           </div>
@@ -65,9 +66,10 @@ const Dashboard = () => {
         {/* Rejilla de Distribución (Grid Sistema Bootstrap) */}
         <div className="row g-4">
           
-          {/* Columna Izquierda: Formulario (Ocupa 4 de 12 columnas en pantallas grandes) */}
+          {/* Columna Izquierda: Formulario */}
           <div className="col-12 col-lg-4">
-            <div className="card shadow-sm border-0 p-3 rounded-4 bg-white">
+            {/* Cambiado bg-white por un gris oscuro azulado (#1e1e24) para las tarjetas */}
+            <div className="card shadow-lg border-0 p-3 rounded-4" style={{ backgroundColor: '#1e1e24' }}>
               <RiskForm 
                 data={formData} 
                 setData={setFormData} 
@@ -77,28 +79,29 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Columna Derecha: Tarjeta, Gráfico e Historial (Ocupa 8 de 12 columnas) */}
+          {/* Columna Derecha: Tarjeta, Gráfico e Historial */}
           <div className="col-12 col-lg-8">
             <div className="d-flex flex-column gap-4">
               
               {prediction ? (
                 <>
-                  <div className="card shadow-sm border-0 p-2 rounded-4 bg-white">
+                  <div className="card shadow-lg border-0 p-2 rounded-4" style={{ backgroundColor: '#1e1e24' }}>
                     <RiskCard prediction={prediction} />
                   </div>
-                  <div className="card shadow-sm border-0 p-4 rounded-4 bg-white">
+                  <div className="card shadow-lg border-0 p-4 rounded-4" style={{ backgroundColor: '#1e1e24' }}>
                     <RiskChart data={formData} />
                   </div>
                 </>
               ) : (
-                <div className="card shadow-sm border-2 border-dashed p-5 text-center rounded-4 bg-white d-flex justify-content-center align-items-center h-100 min-vh-25">
-                  <p className="text-muted m-0 fs-5">
+                // Estado inicial cuando no hay predicción
+                <div className="card shadow-sm border-2 border-dashed p-5 text-center rounded-4 d-flex justify-content-center align-items-center h-100 min-vh-25" style={{ backgroundColor: '#1e1e24', borderColor: '#3a3a42' }}>
+                  <p className="text-secondary m-0 fs-5">
                     💡 Completa los datos y presiona "Predecir Riesgo" para visualizar el semáforo y gráfico de control.
                   </p>
                 </div>
               )}
               
-              <div className="card shadow-sm border-0 p-2 rounded-4 bg-white">
+              <div className="card shadow-lg border-0 p-2 rounded-4" style={{ backgroundColor: '#1e1e24' }}>
                 <History history={history} />
               </div>
 
