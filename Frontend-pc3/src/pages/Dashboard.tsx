@@ -44,7 +44,6 @@ const Dashboard = () => {
   };
 
   return (
-    // Se cambia bg-light por un fondo oscuro profundo (por ejemplo, un gris casi negro muy elegante)
     <div className="min-vh-screen py-5" style={{ backgroundColor: '#121214' }}>
       <div className="container-fluid px-md-5">
         
@@ -63,12 +62,8 @@ const Dashboard = () => {
           </div>
         )}
 
-        {/* Rejilla de Distribución (Grid Sistema Bootstrap) */}
         <div className="row g-4">
-          
-          {/* Columna Izquierda: Formulario */}
           <div className="col-12 col-lg-4">
-            {/* Cambiado bg-white por un gris oscuro azulado (#1e1e24) para las tarjetas */}
             <div className="card shadow-lg border-0 p-3 rounded-4" style={{ backgroundColor: '#1e1e24' }}>
               <RiskForm 
                 data={formData} 
@@ -93,7 +88,6 @@ const Dashboard = () => {
                   </div>
                 </>
               ) : (
-                // Estado inicial cuando no hay predicción
                 <div className="card shadow-sm border-2 border-dashed p-5 text-center rounded-4 d-flex justify-content-center align-items-center h-100 min-vh-25" style={{ backgroundColor: '#1e1e24', borderColor: '#3a3a42' }}>
                   <p className="text-secondary m-0 fs-5">
                     💡 Completa los datos y presiona "Predecir Riesgo" para visualizar el semáforo y gráfico de control.

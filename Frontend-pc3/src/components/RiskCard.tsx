@@ -27,11 +27,9 @@ const RiskCard = ({ prediction }: Props) => {
     },
   };
 
-  // Evitamos caídas si el backend manda algo inesperado
   const config = riskConfig[prediction.risk] || riskConfig.RIESGO_MEDIO;
   const IconComponent = config.icon;
 
-  // Parámetros matemáticos para animar el círculo SVG solicitado
   const radius = 35;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (prediction.confidence / 100) * circumference;
@@ -57,7 +55,6 @@ const RiskCard = ({ prediction }: Props) => {
         <div className="d-flex align-items-center gap-3 bg-dark p-2 px-3 rounded-4 border border-secondary-subtle" style={{ maxWidth: '220px' }}>
           <div className="position-relative d-flex align-items-center justify-content-center" style={{ width: '76px', height: '76px' }}>
             <svg width="76" height="76" style={{ transform: 'rotate(-90deg)' }}>
-              {/* Canal de fondo oscuro */}
               <circle cx="38" cy="38" r={radius} fill="transparent" stroke="#333333" strokeWidth="6" />
               {/* Anillo dinámico de color */}
               <circle

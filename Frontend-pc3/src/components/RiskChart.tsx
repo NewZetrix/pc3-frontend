@@ -74,10 +74,10 @@ const RiskChart = ({ data }: Props) => {
         beginAtZero: true,
         max: 100,
         grid: { color: 'rgba(255, 255, 255, 0.1)' }, 
-        ticks: { color: '#b3b3b3' } // Texto de escala en gris claro
+        ticks: { color: '#b3b3b3' }
       },
       x: {
-        grid: { display: false }, // Limpia las líneas verticales redundantes
+        grid: { display: false },
         ticks: { color: '#b3b3b3', font: { weight: 'bold' as const } }
       }
     },
