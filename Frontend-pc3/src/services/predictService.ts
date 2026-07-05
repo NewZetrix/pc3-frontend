@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { StudentData, RiskPrediction } from "../types/index";
 
-const API_URL = "http://localhost:8080/api/prediccion"; //cambiar url al del backend de Spring Boot
+const API_URL = "https://backend-pc3-o7m8.onrender.com/api/prediccion"
 
 export const predictService = {
   async obtenerRiesgoAcademico(formData: StudentData): Promise<RiskPrediction> {
